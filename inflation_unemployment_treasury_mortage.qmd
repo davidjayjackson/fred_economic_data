@@ -227,3 +227,4 @@ fig_exclude_2020.update_xaxes(
 )
 
 fig_exclude_2020.show()
+```
