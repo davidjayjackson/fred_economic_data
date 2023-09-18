@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas_datareader as pdr
 import plotly.express as px
-
+# --------------------------------------------------------------------------------------------------------------------------
 # Unemployment Rate Over Time
 # View data of the unemployment rate, or the number of people 16 and over actively searching for a job as a percentage of the total labor force.
 
@@ -50,6 +50,7 @@ fig_exclude_2020.update_xaxes(
 
 fig_exclude_2020.show()
 
+# ------------------------------------------------------------------------------------------------------------------------------
 # Inflation Rate Data (Consumer Price Index: CPI), Index 1982-1984=100, Monthly, Not Seasonally AdjustedJan 1913 to Aug 2023 (4 days ago). 
 # View data of the CPI, or an inflation measure derived from tracking the changes in the weighted-average **price of a basket** of common goods and services.
 
@@ -116,6 +117,7 @@ fig_inflation_yoy.update_xaxes(rangeslider_visible=True)
 
 fig_inflation_yoy.show()
 
+# ---------------------------------------------------------------------------------------------------------------------------------
 ### 30 year treasury rates
 # Percent, Monthly, Not Seasonally AdjustedFeb 1977 to Aug 2023 (Sep 1)
 # Yields on actively traded non-inflation-indexed issues adjusted to constant maturities. The 30-year Treasury constant maturity series was discontinued on February 18, 2002, and reintroduced on February 9, 2006.
@@ -156,6 +158,7 @@ fig_treasury_by_year.update_xaxes(
 
 fig_treasury_by_year.show()
 
+# -------------------------------------------------------------------------------------------------------------------------
 # 30-Year Fixed Rate Mortgage Average
 
 unemployment_data = pdr.get_data_fred('MORTGAGE30US')
