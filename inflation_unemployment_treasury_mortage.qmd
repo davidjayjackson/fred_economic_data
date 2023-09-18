@@ -137,3 +137,93 @@ fig_inflation_yoy.update_xaxes(rangeslider_visible=True)
 
 fig_inflation_yoy.show()
 ```
+### 30 year treasury rates
+Percent, Monthly, Not Seasonally AdjustedFeb 1977 to Aug 2023 (Sep 1)
+Yields on actively traded non-inflation-indexed issues adjusted to constant maturities. The 30-year Treasury constant maturity series was discontinued on February 18, 2002, and reintroduced on February 9, 2006.
+#### 30-Year Treasury Rates Over Time
+```{python}
+
+# Retrieving 30-year treasury rates data
+treasury_data = pdr.get_data_fred('GS30')
+
+# Extracting month and year from the index for treasury data
+treasury_data['Month'] = treasury_data.index.month
+treasury_data['Year'] = treasury_data.index.year
+
+# Resetting index for plotting
+treasury_data_reset = treasury_data.reset_index(drop=True)
+
+# Creating a single line plot for 30-year treasury rates with dates on the x-axis
+fig_treasury_single_line = px.line(treasury_data, x=treasury_data.index, y='GS30', title='30-Year Treasury Rates Over Time')
+
+# Adding a date slider to the plot
+fig_treasury_single_line.update_xaxes(rangeslider_visible=True)
+
+fig_treasury_single_line.show()
+```
+#### 30-Year Treasury Rates by Year
+
+```{python}
+# Resetting index for plotting
+treasury_data_reset = treasury_data.reset_index(drop=True)
+
+# Creating the plot for 30-year treasury rates with one line for each year
+fig_treasury_by_year = px.line(treasury_data_reset, x='Month', y='GS30', color='Year', title='30-Year Treasury Rates by Year')
+
+# Updating x-axis to show only months
+fig_treasury_by_year.update_xaxes(
+    tickmode='array',
+    tickvals=list(range(1, 13)),
+    ticktext=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+)
+
+fig_treasury_by_year.show()
+```
+
+### 30-Year Fixed Rate Mortgage Average
+```{python}
+unemployment_data = pdr.get_data_fred('MORTGAGE30US')
+fig = px.line(unemployment_data, x=unemployment_data.index, y='MORTGAGE30US', title='30-Year Fixed Rate Mortgage Average')
+fig.update_xaxes(rangeslider_visible=True)
+fig.show()
+```
+#### 30-Year Fixed Rate Mortgage  (Year over Year)
+
+```{python}
+
+# Extracting month and year from the index
+unemployment_data['Month'] = unemployment_data.index.month
+unemployment_data['Year'] = unemployment_data.index.year
+
+# Resetting index for plotting
+unemployment_data_reset = unemployment_data.reset_index(drop=True)
+
+# Creating the plot
+fig = px.line(unemployment_data_reset, x='Month', y='MORTGAGE30US', color='Year', title='30-Year Fixed Rate Mortgage Over (Yr over Yr)')
+
+# Updating x-axis to show only months
+fig.update_xaxes(
+    tickmode='array',
+    tickvals=list(range(1, 13)),
+    ticktext=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+)
+
+fig.show()
+```
+#### 30 Year Mortage Rate Excluding 2020
+
+```{python}
+# Filtering the data to exclude the year 2020
+unemployment_data_exclude_2020 = unemployment_data_reset[unemployment_data_reset['Year'] != 2020]
+
+# Creating the plot excluding 2020 data
+fig_exclude_2020 = px.line(unemployment_data_exclude_2020, x='Month', y='MORTGAGE30US', color='Year', title='30-Year Fixed Rate Mortgage Excluding 2020')
+
+# Updating x-axis to show only months
+fig_exclude_2020.update_xaxes(
+    tickmode='array',
+    tickvals=list(range(1, 13)),
+    ticktext=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+)
+
+fig_exclude_2020.show()
