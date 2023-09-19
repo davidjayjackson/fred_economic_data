@@ -1,11 +1,10 @@
 ---
-title: "Quarto Basics"
+title: "Federal Reserve Ecomomic Data (FRED)"
 format:
   html:
     code-fold: true
 jupyter: python3
 ---
-# Federal Reserve Ecomomic Data (FRED)
 ```{python}
 import pandas as pd
 import numpy as np
@@ -210,21 +209,6 @@ fig.update_xaxes(
 
 fig.show()
 ```
-#### 30 Year Mortage Rate Excluding 2020
+#### End of Report
 
-```{python}
-# Filtering the data to exclude the year 2020
-unemployment_data_exclude_2020 = unemployment_data_reset[unemployment_data_reset['Year'] != 2020]
 
-# Creating the plot excluding 2020 data
-fig_exclude_2020 = px.line(unemployment_data_exclude_2020, x='Month', y='MORTGAGE30US', color='Year', title='30-Year Fixed Rate Mortgage Excluding 2020')
-
-# Updating x-axis to show only months
-fig_exclude_2020.update_xaxes(
-    tickmode='array',
-    tickvals=list(range(1, 13)),
-    ticktext=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-)
-
-fig_exclude_2020.show()
-```
